@@ -17,13 +17,13 @@
 package com.karumi.reddo;
 
 import com.karumi.reddo.config.ReddoConfig;
+import com.karumi.reddo.config.TypesafeHubReddoConfig;
 
+public class Main {
 
-public class Reddo {
-
-  private final ReddoConfig config;
-
-  public Reddo(ReddoConfig config) {
-    this.config = config;
+  public static void main(String[] args) {
+    ReddoConfig config = new TypesafeHubReddoConfig();
+    System.out.println("Frames per seccond "+ config.getFramesPerSecond());
   }
+
 }

@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.karumi.reddo;
+package com.karumi.reddo.config;
 
-import com.karumi.reddo.config.ReddoConfig;
+public interface ReddoConfig {
 
+  int getFramesPerSecond();
 
-public class Reddo {
-
-  private final ReddoConfig config;
-
-  public Reddo(ReddoConfig config) {
-    this.config = config;
-  }
 }
