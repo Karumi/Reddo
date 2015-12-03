@@ -1,4 +1,4 @@
-Reddo
+Reddo [![Build Status](https://travis-ci.com/Karumi/Reddo.svg?token=Kb2RqPaWxFZ8XPxpqvqz&branch=master)](https://travis-ci.com/Karumi/Reddo)
 =====
 
 
