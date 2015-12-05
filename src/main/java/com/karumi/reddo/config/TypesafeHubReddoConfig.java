@@ -35,8 +35,12 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     config.checkValid(config, new String[] { CONFIG_NAME });
   }
 
-  public int getFramesPerSecond() {
+  @Override public int getFramesPerSecond() {
     return config.getInt("fps");
+  }
+
+  @Override public String getGitHubOauthToken() {
+    return config.getString("gitHubOauthToken");
   }
 
   private File getConfigFile() {

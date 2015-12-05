@@ -20,4 +20,5 @@ public interface ReddoConfig {
 
   int getFramesPerSecond();
 
+  String getGitHubOauthToken();
 }

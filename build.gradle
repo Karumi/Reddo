@@ -10,7 +10,7 @@ repositories {
 
 dependencies {
     compile 'com.typesafe:config:1.3.0'
-    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
+    compile 'org.kohsuke:github-api:1.71'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10.19'
 }

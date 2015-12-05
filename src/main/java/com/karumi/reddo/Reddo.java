@@ -39,7 +39,7 @@ public class Reddo {
     tasks.add(task);
   }
 
-  public void start() {
+  public void evaluateTasks() {
     List<String> reddoTaskResults = executeTasks();
     showResults(reddoTaskResults);
   }
@@ -47,7 +47,7 @@ public class Reddo {
   private List<String> executeTasks() {
     return tasks.stream().parallel()
         .map(ReddoTask::execute)
-        .filter(result -> !result.isEmpty())
+        .filter(result -> result != null && !result.isEmpty())
         .collect(Collectors.toList());
   }
 

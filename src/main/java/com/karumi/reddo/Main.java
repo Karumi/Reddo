@@ -18,6 +18,8 @@ package com.karumi.reddo;
 
 import com.karumi.reddo.config.ReddoConfig;
 import com.karumi.reddo.config.TypesafeHubReddoConfig;
+import com.karumi.reddo.github.GitHubApiClient;
+import com.karumi.reddo.task.GitHubRepositoryTask;
 import com.karumi.reddo.task.MessageTask;
 import com.karumi.reddo.view.SysOutView;
 
@@ -25,13 +27,19 @@ public class Main {
 
   public static void main(String[] args) {
     ReddoConfig config = new TypesafeHubReddoConfig();
+    GitHubApiClient.setOauthToken(config.getGitHubOauthToken());
+    GitHubApiClient gitHubApiClient = new GitHubApiClient();
     Reddo reddo = new Reddo(config, new SysOutView());
+
     reddo.addTask(new MessageTask("Hola"));
     reddo.addTask(new MessageTask("Pedro"));
     reddo.addTask(new MessageTask("Vicente"));
     reddo.addTask(new MessageTask("Gómez"));
     reddo.addTask(new MessageTask("Sánchez"));
-    reddo.start();
+
+    reddo.addTask(new GitHubRepositoryTask("karumi/Dexter", gitHubApiClient));
+    reddo.addTask(new GitHubRepositoryTask("pedrovgs/DraggablePanel", gitHubApiClient));
+    reddo.evaluateTasks();
   }
 
 }
