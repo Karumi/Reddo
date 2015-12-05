@@ -41,7 +41,7 @@ public class Reddo {
 
   public void start() {
     List<String> reddoTaskResults = executeTasks();
-
+    showResults(reddoTaskResults);
   }
 
   private List<String> executeTasks() {
@@ -49,5 +49,9 @@ public class Reddo {
         .map(ReddoTask::execute)
         .filter(result -> !result.isEmpty())
         .collect(Collectors.toList());
+  }
+
+  private void showResults(List<String> reddoTaskResults) {
+    view.showMessages(reddoTaskResults);
   }
 }

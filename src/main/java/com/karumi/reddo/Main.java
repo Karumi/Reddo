@@ -19,12 +19,13 @@ package com.karumi.reddo;
 import com.karumi.reddo.config.ReddoConfig;
 import com.karumi.reddo.config.TypesafeHubReddoConfig;
 import com.karumi.reddo.task.MessageTask;
+import com.karumi.reddo.view.SysOutView;
 
 public class Main {
 
   public static void main(String[] args) {
     ReddoConfig config = new TypesafeHubReddoConfig();
-    Reddo reddo = new Reddo(config, view);
+    Reddo reddo = new Reddo(config, new SysOutView());
     reddo.addTask(new MessageTask("Hola"));
     reddo.addTask(new MessageTask("Pedro"));
     reddo.addTask(new MessageTask("Vicente"));
