@@ -16,9 +16,12 @@
 
 package com.karumi.reddo.config;
 
+import com.karumi.reddo.task.ReddoTask;
+import java.util.List;
+
 public interface ReddoConfig {
 
   int getFramesPerSecond();
 
-  String getGitHubOauthToken();
+  List<ReddoTask> getConfiguredTasks();
 }

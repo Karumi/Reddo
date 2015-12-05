@@ -16,27 +16,25 @@
 
 package com.karumi.reddo;
 
-import com.karumi.reddo.config.ReddoConfig;
 import com.karumi.reddo.task.ReddoTask;
 import com.karumi.reddo.view.View;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Reddo {
 
-  private final ReddoConfig config;
   private final View view;
-  private final List<ReddoTask> tasks;
+  private final Collection<ReddoTask> tasks;
 
-  public Reddo(ReddoConfig config, View view) {
-    this.config = config;
+  public Reddo(View view) {
     this.view = view;
-    tasks = new LinkedList<>();
+    this.tasks = new LinkedList<>();
   }
 
-  public void addTask(ReddoTask task) {
-    tasks.add(task);
+  public void addTasks(Collection<ReddoTask> tasks) {
+    this.tasks.addAll(tasks);
   }
 
   public void evaluateTasks() {
@@ -45,7 +43,8 @@ public class Reddo {
   }
 
   private List<String> executeTasks() {
-    return tasks.stream().parallel()
+    return tasks.stream()
+        .parallel()
         .map(ReddoTask::execute)
         .filter(result -> result != null && !result.isEmpty())
         .collect(Collectors.toList());
