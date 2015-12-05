@@ -21,3 +21,5 @@ target
 Thumbs.db
 *.swp
 *.bak
+
+reddo-config.json
