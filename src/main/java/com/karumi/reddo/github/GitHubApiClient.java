@@ -48,17 +48,28 @@ public class GitHubApiClient {
     GitHubRepository repository = null;
     try {
       GHRepository gitHubRepository = gitHub.getRepository(name);
-      String repositoryName = gitHubRepository.getName();
-      int numberOfStars = 0;
-      int numberOfOpenPullRequests = gitHubRepository.getPullRequests(GHIssueState.OPEN).size();
-      int numberOfPullRequests =
-          numberOfOpenPullRequests + gitHubRepository.getPullRequests(GHIssueState.CLOSED).size();
-      repository = new GitHubRepository(repositoryName, numberOfStars, numberOfOpenPullRequests,
-          numberOfPullRequests);
+      repository = mapGhRepository(gitHubRepository);
     } catch (IOException e) {
       System.out.println("Error retrieving information from your GitHub account.");
     }
     return repository;
+  }
+
+  private GitHubRepository mapGhRepository(
+      GHRepository gitHubRepository) throws IOException {
+    String repositoryName = gitHubRepository.getName();
+    int stars = 0;
+    int openPullRequests = gitHubRepository.getPullRequests(GHIssueState.OPEN).size();
+    int pullRequests =
+        openPullRequests + gitHubRepository.getPullRequests(GHIssueState.CLOSED).size();
+    int openIssues = gitHubRepository.getOpenIssueCount();
+    int branches = gitHubRepository.getBranches().size();
+    int collaborators = gitHubRepository.getCollaborators().size();
+    int forks = gitHubRepository.getForks();
+    int watchers = gitHubRepository.getWatchers();
+
+    return new GitHubRepository(repositoryName, stars, openPullRequests,
+        pullRequests,openIssues,branches,collaborators,forks,watchers);
   }
 
   private void validateGitHubConfiguration() {

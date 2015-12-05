@@ -18,41 +18,76 @@ package com.karumi.reddo.github;
 
 public class GitHubRepository {
 
-  private final String repositoryName;
-  private final int numberOfStars;
-  private final int numberOfOpenPullRequests;
-  private final int numberOfPullRequests;
+  private final String name;
+  private final int stars;
+  private final int openPullRequests;
+  private final int pullRequests;
+  private final int openIssues;
+  private final int branches;
+  private final int collaborators;
+  private final int forks;
+  private final int watchers;
 
-  public GitHubRepository(String repositoryName, int numberOfStars, int numberOfOpenPullRequests,
-      int numberOfPullRequests) {
-    this.repositoryName = repositoryName;
-    this.numberOfStars = numberOfStars;
-    this.numberOfOpenPullRequests = numberOfOpenPullRequests;
-    this.numberOfPullRequests = numberOfPullRequests;
+  public GitHubRepository(String name, int stars, int openPullRequests, int pullRequests,
+      int openIssues, int branches, int collaborators, int forks, int watchers) {
+    this.name = name;
+    this.stars = stars;
+    this.openPullRequests = openPullRequests;
+    this.pullRequests = pullRequests;
+    this.openIssues = openIssues;
+    this.branches = branches;
+    this.collaborators = collaborators;
+    this.forks = forks;
+    this.watchers = watchers;
   }
 
-  public String getRepositoryName() {
-    return repositoryName;
+  public String getName() {
+    return name;
   }
 
-  public int getNumberOfStars() {
-    return numberOfStars;
+  public int getStars() {
+    return stars;
   }
 
-  public int getNumberOfOpenPullRequests() {
-    return numberOfOpenPullRequests;
+  public int getOpenPullRequests() {
+    return openPullRequests;
   }
 
-  public int getNumberOfPullRequests() {
-    return numberOfPullRequests;
+  public int getPullRequests() {
+    return pullRequests;
+  }
+
+  public int getOpenIssues() {
+    return openIssues;
+  }
+
+  public int getBranches() {
+    return branches;
+  }
+
+  public int getCollaborators() {
+    return collaborators;
+  }
+
+  public int getForks() {
+    return forks;
+  }
+
+  public int getWatchers() {
+    return watchers;
   }
 
   @Override public String toString() {
     return "GitHubRepository{" +
-        "repositoryName='" + repositoryName + '\'' +
-        ", numberOfStars=" + numberOfStars +
-        ", numberOfOpenPullRequests=" + numberOfOpenPullRequests +
-        ", numberOfPullRequests=" + numberOfPullRequests +
+        "name='" + name + '\'' +
+        ", stars=" + stars +
+        ", openPullRequests=" + openPullRequests +
+        ", pullRequests=" + pullRequests +
+        ", openIssues=" + openIssues +
+        ", branches=" + branches +
+        ", collaborators=" + collaborators +
+        ", forks=" + forks +
+        ", watchers=" + watchers +
         '}';
   }
 }
