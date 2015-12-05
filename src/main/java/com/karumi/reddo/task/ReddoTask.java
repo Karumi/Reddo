@@ -14,23 +14,10 @@
  * limitations under the License.
  */
 
-package com.karumi.reddo;
+package com.karumi.reddo.task;
 
-import com.karumi.reddo.config.ReddoConfig;
-import com.karumi.reddo.config.TypesafeHubReddoConfig;
-import com.karumi.reddo.task.MessageTask;
+public interface ReddoTask {
 
-public class Main {
-
-  public static void main(String[] args) {
-    ReddoConfig config = new TypesafeHubReddoConfig();
-    Reddo reddo = new Reddo(config, view);
-    reddo.addTask(new MessageTask("Hola"));
-    reddo.addTask(new MessageTask("Pedro"));
-    reddo.addTask(new MessageTask("Vicente"));
-    reddo.addTask(new MessageTask("Gómez"));
-    reddo.addTask(new MessageTask("Sánchez"));
-    reddo.start();
-  }
+  String execute();
 
 }
