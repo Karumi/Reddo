@@ -51,8 +51,8 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
 
   @Override public List<ReddoTask> getConfiguredTasks() {
     List<ReddoTask> tasks = new LinkedList<>();
-    tasks.addAll(getGitHubRepositoriesTasks());
     tasks.addAll(getMessagesTasks());
+    tasks.addAll(getGitHubRepositoriesTasks());
     tasks.addAll(getGitHubUsersTasks());
     return tasks;
   }
@@ -78,8 +78,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     GitHubApiClient gitHubApiClient = getGitHubApiClient();
     List<String> users = config.getStringList("gitHubUsers");
     return users.stream()
-        .map(userName -> new GitHubUserTask(userName, gitHubApiClient))
-        .collect(Collectors.toList());
+        .map(userName -> new GitHubUserTask(userName, gitHubApiClient)).collect(Collectors.toList());
   }
 
   private GitHubApiClient getGitHubApiClient() {
