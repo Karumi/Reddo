@@ -6,6 +6,9 @@ apply plugin: 'application'
 
 repositories {
     mavenCentral()
+    maven {
+        url "http://repo.jenkins-ci.org/public/"
+    }
 }
 
 dependencies {
