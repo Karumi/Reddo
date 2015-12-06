@@ -63,7 +63,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
         return new MatrixLedView(fps);
       case "sysout":
       default:
-        return new SysOutView(fps);
+        return new SysOutView();
     }
   }
 

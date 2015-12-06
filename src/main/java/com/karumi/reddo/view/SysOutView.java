@@ -20,12 +20,6 @@ import java.util.List;
 
 public class SysOutView implements View {
 
-  private final int fps;
-
-  public SysOutView(int fps) {
-    this.fps = fps;
-  }
-
   @Override public void showMessages(List<String> messages) {
     messages.forEach(System.out::println);
   }
