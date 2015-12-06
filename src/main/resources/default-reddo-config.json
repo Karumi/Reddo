@@ -2,6 +2,9 @@
   "fps" : 1,
   "output" : "led",
   "gitHubOauthToken" : "",
+  "messages" : [
+    "Welcome to the Karumi HQs ¯\\_(ツ)_/¯"
+  ],
   "gitHubRepositories" : [
     "Karumi/Dexter",
     "Karumi/Rosie",
@@ -12,8 +15,5 @@
   ],
   "gitHubUsers" : [
     "karumi"
-  ],
-  "messages" : [
-    "Welcome to the Karumi HQs ¯\\_(ツ)_/¯"
   ]
 }
