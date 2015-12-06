@@ -21,6 +21,9 @@ import com.karumi.reddo.task.GitHubRepositoryTask;
 import com.karumi.reddo.task.GitHubUserTask;
 import com.karumi.reddo.task.MessageTask;
 import com.karumi.reddo.task.ReddoTask;
+import com.karumi.reddo.view.MatrixLedView;
+import com.karumi.reddo.view.SysOutView;
+import com.karumi.reddo.view.View;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import java.io.File;
@@ -42,19 +45,26 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     File configFile = getConfigFile();
     this.config = ConfigFactory.
         parseFile(configFile).withFallback(ConfigFactory.load(DEFAULT_CONFIG_PATH));
-    config.checkValid(config, new String[] { CONFIG_NAME });
+    config.checkValid(config, CONFIG_NAME);
   }
 
-  @Override public int getFramesPerSecond() {
-    return config.getInt("fps");
-  }
-
-  @Override public List<ReddoTask> getConfiguredTasks() {
+  @Override public List<ReddoTask> getTasks() {
     List<ReddoTask> tasks = new LinkedList<>();
     tasks.addAll(getMessagesTasks());
     tasks.addAll(getGitHubRepositoriesTasks());
     tasks.addAll(getGitHubUsersTasks());
     return tasks;
+  }
+
+  @Override public View getView() {
+    int fps = getFramesPerSecond();
+    switch (config.getString("output")) {
+      case "led":
+        return new MatrixLedView(fps);
+      case "sysout":
+      default:
+        return new SysOutView(fps);
+    }
   }
 
   private String getGitHubOauthToken() {
@@ -78,7 +88,8 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     GitHubApiClient gitHubApiClient = getGitHubApiClient();
     List<String> users = config.getStringList("gitHubUsers");
     return users.stream()
-        .map(userName -> new GitHubUserTask(userName, gitHubApiClient)).collect(Collectors.toList());
+        .map(userName -> new GitHubUserTask(userName, gitHubApiClient))
+        .collect(Collectors.toList());
   }
 
   private GitHubApiClient getGitHubApiClient() {
@@ -87,6 +98,10 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
       gitHubApiClient = new GitHubApiClient();
     }
     return gitHubApiClient;
+  }
+
+  private int getFramesPerSecond() {
+    return config.getInt("fps");
   }
 
   private File getConfigFile() {

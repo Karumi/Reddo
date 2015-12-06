@@ -1,5 +1,6 @@
 {
   "fps" : 1,
+  "output" : "led",
   "gitHubOauthToken" : "",
   "gitHubRepositories" : [
     "Karumi/Dexter",
