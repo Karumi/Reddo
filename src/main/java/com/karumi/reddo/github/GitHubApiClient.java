@@ -82,13 +82,13 @@ public class GitHubApiClient {
 
   private GitHubRepository mapGhRepository(GHRepository gitHubRepository) throws IOException {
     String repositoryName = gitHubRepository.getName();
-    int stars = 0;
+    int stars = gitHubRepository.listStargazers().asList().size();
     int openPullRequests = gitHubRepository.getPullRequests(GHIssueState.OPEN).size();
     int pullRequests =
         openPullRequests + gitHubRepository.getPullRequests(GHIssueState.CLOSED).size();
     int openIssues = gitHubRepository.getOpenIssueCount();
     int branches = gitHubRepository.getBranches().size();
-    int collaborators = 9;
+    int collaborators = gitHubRepository.getCollaborators().size();
     int forks = gitHubRepository.getForks();
     int watchers = gitHubRepository.getWatchers();
 
