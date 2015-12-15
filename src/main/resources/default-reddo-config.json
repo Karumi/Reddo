@@ -1,0 +1,19 @@
+{
+  "fps" : 1,
+  "output" : "led",
+  "gitHubOauthToken" : "",
+  "messages" : [
+    "Welcome to the Karumi HQs ¯\\_(ツ)_/¯"
+  ],
+  "gitHubRepositories" : [
+    "Karumi/Dexter",
+    "Karumi/Rosie",
+    "Karumi/BothamUI",
+    "Karumi/BothamNetworking",
+    "Karumi/ExpandableSelector",
+    "Karumi/HeaderRecyclerView"
+  ],
+  "gitHubUsers" : [
+    "karumi"
+  ]
+}
