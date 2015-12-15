@@ -39,12 +39,6 @@ public class GitHubApiClient {
     }
   }
 
-  private static void validateOauthToken(String oauthToken) {
-    if (oauthToken == null || oauthToken.isEmpty()) {
-      throw new IllegalArgumentException("The oauth token can not be null or empty.");
-    }
-  }
-
   public GitHubRepository getRepository(String name) {
     validateGitHubConfiguration();
     validateRepositoryName(name);
@@ -94,6 +88,12 @@ public class GitHubApiClient {
 
     return new GitHubRepository(repositoryName, stars, openPullRequests, pullRequests, openIssues,
         branches, collaborators, forks, watchers);
+  }
+
+  private static void validateOauthToken(String oauthToken) {
+    if (oauthToken == null || oauthToken.isEmpty()) {
+      throw new IllegalArgumentException("The oauth token can not be null or empty.");
+    }
   }
 
   private void validateGitHubConfiguration() {
