@@ -1,5 +1,5 @@
 {
-  "fps" : 1,
+  "fps" : 16,
   "output" : "led",
   "gitHubOauthToken" : "",
   "messages" : [

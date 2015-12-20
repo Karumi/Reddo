@@ -54,8 +54,9 @@ public class MatrixLedView implements View {
     }
 
     private void waitForNextFrame() {
+        float frameTime = 1 / (float) fps * 1000;
         try {
-            Thread.sleep(16);
+            Thread.sleep((long) frameTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
