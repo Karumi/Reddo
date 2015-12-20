@@ -34,12 +34,33 @@ public class MatrixLedView implements View {
   @Override public void showMessages(List<String> messages) {
     String joinMessages = String.join(" --- ", messages);
     int stringWidthInPixels = getStringWidthInPixels(joinMessages);
+    BufferedImage outputImage = getJoinMessagesAsImage(joinMessages, stringWidthInPixels);
+    drawImage(outputImage);
+  }
+
+  private void drawImage(BufferedImage outputImage) {
+    int width = outputImage.getWidth();
+    JFrame frame = new JFrame();
+    JPanel comp = new JPanel();
+    frame.add(comp);
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(16, 32+22);
+    frame.getGraphics().drawImage(outputImage,0,0,null);
+    JLabel picLabel = new JLabel(new ImageIcon(outputImage));
+    //frame.add(picLabel);
+    frame.setVisible(true);
+    for (int i = 0; i < width; i++) {
+
+    }
+  }
+
+  private BufferedImage getJoinMessagesAsImage(String joinMessages, int stringWidthInPixels) {
     BufferedImage outputImage = new BufferedImage(stringWidthInPixels, LED_HEIGHT, BufferedImage.TYPE_INT_RGB);
     Graphics2D graphics = outputImage.createGraphics();
     graphics.setFont(getFont());
-    graphics.setColor(Color.WHITE);
+    graphics.setColor(Color.BLUE);
     graphics.drawString(joinMessages,0,LED_HEIGHT);
-    JOptionPane.showMessageDialog(null, new ImageIcon(outputImage));
+    return outputImage;
   }
 
   private int getStringWidthInPixels(String joinMessages) {
