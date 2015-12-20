@@ -27,11 +27,13 @@ import javax.swing.JPanel;
 
 public class MatrixLedView implements View {
 
-  public static final int LED_HEIGHT = 32;
+  private static final int LED_HEIGHT = 32;
+  private static final int MIN_FPS = 60;
 
   private final int fps;
 
   public MatrixLedView(int fps) {
+    validateFps(fps);
     this.fps = fps;
   }
 
@@ -84,5 +86,12 @@ public class MatrixLedView implements View {
 
   private Font getFont() {
     return new Font("Serif", Font.PLAIN, LED_HEIGHT - 2);
+  }
+
+
+  private void validateFps(int fps) {
+    if (fps < MIN_FPS) {
+      throw new IllegalArgumentException("The configured fps can't be less than 60");
+    }
   }
 }
