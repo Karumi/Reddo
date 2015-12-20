@@ -78,16 +78,11 @@ public class GitHubRepository {
   }
 
   @Override public String toString() {
-    return "GitHubRepository{" +
-        "name='" + name + '\'' +
-        ", stars=" + stars +
-        ", openPullRequests=" + openPullRequests +
-        ", pullRequests=" + pullRequests +
-        ", openIssues=" + openIssues +
-        ", branches=" + branches +
-        ", collaborators=" + collaborators +
-        ", forks=" + forks +
-        ", watchers=" + watchers +
-        '}';
+    return
+        "" + name + " -> " +
+        " ★ : " + stars +
+        ", Issues : " + openIssues +
+        ", Open PRs : " + openPullRequests +
+        ", PRs : " + pullRequests;
   }
 }
