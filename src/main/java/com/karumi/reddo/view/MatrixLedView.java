@@ -47,7 +47,7 @@ public class MatrixLedView implements View {
     frame.setSize(16, 32+22);
     frame.getGraphics().drawImage(outputImage,0,0,null);
     JLabel picLabel = new JLabel(new ImageIcon(outputImage));
-    //frame.add(picLabel);
+    frame.add(picLabel);
     frame.setVisible(true);
     for (int i = 0; i < width; i++) {
 
