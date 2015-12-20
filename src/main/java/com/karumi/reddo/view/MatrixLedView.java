@@ -23,56 +23,63 @@ import java.util.List;
 
 public class MatrixLedView implements View {
 
-  public static final int LED_HEIGHT = 32;
+    public static final int LED_HEIGHT = 32;
 
-  private final int fps;
+    private final int fps;
 
-  public MatrixLedView(int fps) {
-    this.fps = fps;
-  }
-
-  @Override public void showMessages(List<String> messages) {
-    String joinMessages = String.join(" --- ", messages);
-    int stringWidthInPixels = getStringWidthInPixels(joinMessages);
-    BufferedImage outputImage = getJoinMessagesAsImage(joinMessages, stringWidthInPixels);
-    drawImage(outputImage);
-  }
-
-  private void drawImage(BufferedImage outputImage) {
-    int width = outputImage.getWidth();
-    JFrame frame = new JFrame();
-    JPanel comp = new JPanel();
-    frame.add(comp);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(16, 32+22);
-    frame.getGraphics().drawImage(outputImage,0,0,null);
-    JLabel picLabel = new JLabel(new ImageIcon(outputImage));
-    frame.add(picLabel);
-    frame.setVisible(true);
-    for (int i = 0; i < width; i++) {
-
+    public MatrixLedView(int fps) {
+        this.fps = fps;
     }
-  }
 
-  private BufferedImage getJoinMessagesAsImage(String joinMessages, int stringWidthInPixels) {
-    BufferedImage outputImage = new BufferedImage(stringWidthInPixels, LED_HEIGHT, BufferedImage.TYPE_INT_RGB);
-    Graphics2D graphics = outputImage.createGraphics();
-    graphics.setFont(getFont());
-    graphics.setColor(Color.BLUE);
-    graphics.drawString(joinMessages,0,LED_HEIGHT);
-    return outputImage;
-  }
+    @Override
+    public void showMessages(List<String> messages) {
+        String joinMessages = String.join(" --- ", messages);
+        int stringWidthInPixels = getStringWidthInPixels(joinMessages);
+        BufferedImage outputImage = getJoinMessagesAsImage(joinMessages, stringWidthInPixels);
+        drawImage(outputImage);
+    }
 
-  private int getStringWidthInPixels(String joinMessages) {
-    Graphics graphics = new BufferedImage(1,1,BufferedImage.TYPE_INT_RGB).getGraphics();
-    Font font = getFont();
-    graphics.setFont(font);
-    return graphics.getFontMetrics().stringWidth(joinMessages);
-  }
+    private void drawImage(BufferedImage outputImage) {
+        int width = outputImage.getWidth();
+        JFrame frame = new JFrame();
+        JPanel comp = new JPanel();
+        frame.add(comp);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(16, 32 + 22);
+        frame.setVisible(true);
+        for (int i = 0; i < width; i++) {
+            frame.getGraphics().drawImage(outputImage, -i, 22, null);
+            waitForNextFrame();
+        }
+    }
 
-  private Font getFont() {
-    return new Font("Serif", Font.PLAIN, LED_HEIGHT);
-  }
+    private void waitForNextFrame() {
+        try {
+            Thread.sleep(16);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private BufferedImage getJoinMessagesAsImage(String joinMessages, int stringWidthInPixels) {
+        BufferedImage outputImage = new BufferedImage(stringWidthInPixels, LED_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics = outputImage.createGraphics();
+        graphics.setFont(getFont());
+        graphics.setColor(Color.BLUE);
+        graphics.drawString(joinMessages, 0, LED_HEIGHT - 5);
+        return outputImage;
+    }
+
+    private int getStringWidthInPixels(String joinMessages) {
+        Graphics graphics = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB).getGraphics();
+        Font font = getFont();
+        graphics.setFont(font);
+        return graphics.getFontMetrics().stringWidth(joinMessages);
+    }
+
+    private Font getFont() {
+        return new Font("Serif", Font.PLAIN, LED_HEIGHT - 2);
+    }
 
 
 }
