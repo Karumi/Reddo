@@ -30,6 +30,8 @@ public class Main {
     Reddo reddo = new Reddo(view);
     Collection<ReddoTask> tasksFromConfig = config.getTasks();
     reddo.addTasks(tasksFromConfig);
-    reddo.evaluateTasks();
+    while (true) {
+      reddo.evaluateTasks();
+    }
   }
 }
