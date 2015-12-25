@@ -1,4 +1,4 @@
-Reddo [![Build Status](https://travis-ci.com/Karumi/Reddo.svg?token=Kb2RqPaWxFZ8XPxpqvqz&branch=master)](https://travis-ci.com/Karumi/Reddo)
+![Karumi logo][karumilogo] Reddo [![Build Status](https://travis-ci.com/Karumi/Reddo.svg?token=Kb2RqPaWxFZ8XPxpqvqz&branch=master)](https://travis-ci.com/Karumi/Reddo)
 =====
 
 Project under development.
@@ -19,3 +19,4 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
+[karumilogo]: https://cloud.githubusercontent.com/assets/858090/11626547/e5a1dc66-9ce3-11e5-908d-537e07e82090.png
