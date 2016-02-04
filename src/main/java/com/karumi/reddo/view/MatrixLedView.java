@@ -21,9 +21,15 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.net.SocketFactory;
+import javax.swing.*;
 
 public class MatrixLedView implements View {
 
@@ -31,10 +37,12 @@ public class MatrixLedView implements View {
   private static final int MIN_FPS = 60;
 
   private final int fps;
+  private final Socket socket;
 
-  public MatrixLedView(int fps) {
+  public MatrixLedView(int fps, Socket socket) {
     validateFps(fps);
     this.fps = fps;
+    this.socket = socket;
   }
 
   @Override public void showMessages(List<String> messages) {
@@ -45,17 +53,39 @@ public class MatrixLedView implements View {
   }
 
   private void drawImage(BufferedImage outputImage) {
-    int width = outputImage.getWidth();
-    JFrame frame = new JFrame();
-    JPanel comp = new JPanel();
-    frame.add(comp);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(16, 32 + 22);
-    frame.setVisible(true);
-    for (int i = 0; i < width; i++) {
-      frame.getGraphics().drawImage(outputImage, -i, 22, null);
-      waitForNextFrame();
+    try {
+      System.out.println("Sending image (" + outputImage.getHeight() + ",  " + outputImage.getWidth() + ")");
+      DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
+      stream.writeInt(outputImage.getHeight());
+      stream.writeInt(outputImage.getWidth());
+      for (int y = 0; y < outputImage.getHeight(); y++) {
+        for (int x = 0; x < outputImage.getWidth(); x++) {
+          stream.writeInt(outputImage.getRGB(x, y));
+        }
+      }
+      stream.flush();
+      stream.close();
+      socket.close();
+    } catch (IOException e) {
+      // ... for real, I'm fucking tired of IOExceptions everywhere, I'm gonna plug every socket
+      // logic in a single class replacing all those IOExceptions with unchecked exceptions
+      throw new RuntimeException("Ole tus cojones morenos ya hombre... " + e.getMessage());
     }
+
+    System.exit(0);
+
+
+//    int width = outputImage.getWidth();
+//    JFrame frame = new JFrame();
+//    JPanel comp = new JPanel();
+//    frame.add(comp);
+//    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//    frame.setSize(16, 32 + 22);
+//    frame.setVisible(true);
+//    for (int i = 0; i < width; i++) {
+//      frame.getGraphics().drawImage(outputImage, -i, 22, null);
+//      waitForNextFrame();
+//    }
   }
 
   private void waitForNextFrame() {
@@ -87,7 +117,6 @@ public class MatrixLedView implements View {
   private Font getFont() {
     return new Font("Serif", Font.PLAIN, LED_HEIGHT - 2);
   }
-
 
   private void validateFps(int fps) {
     if (fps < MIN_FPS) {

@@ -1,6 +1,11 @@
 {
   "fps" : 60,
   "output" : "led",
+  "connection" : {
+    "localPort": 9000,
+    "remoteIp" : "127.0.0.1",
+    "remotePort" : 9001
+  },
   "gitHubOauthToken" : "",
   "messages" : [
     "Welcome to the Karumi HQs ¯\\_(ツ)_/¯"

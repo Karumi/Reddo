@@ -25,8 +25,12 @@ import com.karumi.reddo.view.MatrixLedView;
 import com.karumi.reddo.view.SysOutView;
 import com.karumi.reddo.view.View;
 import com.typesafe.config.Config;
+import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigFactory;
 import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,8 +55,8 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
   @Override public List<ReddoTask> getTasks() {
     List<ReddoTask> tasks = new LinkedList<>();
     tasks.addAll(getMessagesTasks());
-    tasks.addAll(getGitHubRepositoriesTasks());
-    tasks.addAll(getGitHubUsersTasks());
+//    tasks.addAll(getGitHubRepositoriesTasks());
+//    tasks.addAll(getGitHubUsersTasks());
     return tasks;
   }
 
@@ -60,7 +64,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     int fps = getFramesPerSecond();
     switch (config.getString("output")) {
       case "led":
-        return new MatrixLedView(fps);
+        return new MatrixLedView(fps, getSocket());
       case "sysout":
       default:
         return new SysOutView();
@@ -102,6 +106,22 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
 
   private int getFramesPerSecond() {
     return config.getInt("fps");
+  }
+
+  private Socket getSocket() {
+    try {
+      return new Socket(getConnectionRemoteIp(), getConnectionRemotePort());
+    } catch (IOException e) {
+      throw new ConfigException.Generic("Can not connect to " + getConnectionRemoteIp() + ":" + getConnectionRemotePort());
+    }
+  }
+
+  private String getConnectionRemoteIp() {
+    return config.getString("connection.remoteIp");
+  }
+
+  private int getConnectionRemotePort() {
+    return config.getInt("connection.remotePort");
   }
 
   private File getConfigFile() {
