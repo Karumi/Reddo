@@ -55,8 +55,8 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
   @Override public List<ReddoTask> getTasks() {
     List<ReddoTask> tasks = new LinkedList<>();
     tasks.addAll(getMessagesTasks());
-//    tasks.addAll(getGitHubRepositoriesTasks());
-//    tasks.addAll(getGitHubUsersTasks());
+    tasks.addAll(getGitHubRepositoriesTasks());
+    tasks.addAll(getGitHubUsersTasks());
     return tasks;
   }
 
@@ -64,7 +64,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     int fps = getFramesPerSecond();
     switch (config.getString("output")) {
       case "led":
-        return new MatrixLedView(fps, getSocket());
+        return new MatrixLedView(fps, getConnectionRemoteIp(), getConnectionRemotePort());
       case "sysout":
       default:
         return new SysOutView();
@@ -106,14 +106,6 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
 
   private int getFramesPerSecond() {
     return config.getInt("fps");
-  }
-
-  private Socket getSocket() {
-    try {
-      return new Socket(getConnectionRemoteIp(), getConnectionRemotePort());
-    } catch (IOException e) {
-      throw new ConfigException.Generic("Can not connect to " + getConnectionRemoteIp() + ":" + getConnectionRemotePort());
-    }
   }
 
   private String getConnectionRemoteIp() {

@@ -1,6 +1,7 @@
 import socket
 import struct
 import time
+from rgbmatrix import RGBMatrix
 
 class ReddoSocket:
 	def __init__(self, port):
@@ -49,14 +50,6 @@ class Pixel:
 	def __repr__(self):
 		return "(r: " + str(self.red) + ", g: " + str(self.green) + ", b: " + str(self.blue) + ")"
 
-	@staticmethod
-	def from_char(char):
-		value = ord(char)
-		red = (value >> 16) & 255
-		green = (value >> 8) & 255
-		blue = value & 255
-		return Pixel(red, green, blue)
-
 class Frame:
 	def __init__(self, width, height, data):
 		self.width = width
@@ -67,7 +60,7 @@ class Frame:
 		if x < 0 or x >= self.width or y < 0 or y >= self.height:
 			return None
 
-		return self.data(y * self.width + x)
+		return self.data[y * self.width + x]
 
 	def print_raw(self):
 		print "[" + str(self.width) + " x " + str(self.height) + "]"
@@ -86,31 +79,36 @@ class Frame:
 		height = int(struct.unpack("!I", raw_height)[0])
 		width = int(struct.unpack("!I", raw_width)[0])
 
-		raw_data = reddo_socket.read_data(width * height)
+		raw_data = reddo_socket.read_data(4 * width * height)
 		if not raw_data:
 			return None
 
-		data = [Pixel.from_char(v) for v in raw_data]
+		data = [Pixel(ord(raw_data[i + 1]), ord(raw_data[i + 2]), ord(raw_data[i + 3])) for i in range(0, len(raw_data), 4)]
 		return Frame(width, height, data)
 
 class Daemon:
 	def __init__(self, port):
+		self.matrix = RGBMatrix(16)
+		self.port = port
 		self.reddo_socket = ReddoSocket(9001)
 		self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.port = port
 
 	def start(self):
+		self.matrix.brightness = 30
 		while True:
 			self.reddo_socket.accept_connection()
 			frame = Frame.from_connection(self.reddo_socket)
-			if frame:
-				frame.print_raw()
+			while frame:
+				canvas = self.matrix.CreateFrameCanvas()
+				for i in range(frame.height):
+					for j in range(frame.width):
+						pixel = frame.get_pixel(j, i)
+						canvas.SetPixel(j, i, pixel.red, pixel.green, pixel.blue)
 
-	# Private
-
-	def accept_connection(self):
-		connection, address = self.socket.accept()
-		return connection
+				canvas = self.matrix.SwapOnVSync(canvas)
+				frame = Frame.from_connection(self.reddo_socket)
+			canvas.Fill(0, 0, 0)
+			canvas = self.matrix.SwapOnVSync(canvas)
 
 def main():
 	daemon = Daemon(9001)
