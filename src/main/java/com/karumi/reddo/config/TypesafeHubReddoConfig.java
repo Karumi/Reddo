@@ -25,8 +25,12 @@ import com.karumi.reddo.view.MatrixLedView;
 import com.karumi.reddo.view.SysOutView;
 import com.karumi.reddo.view.View;
 import com.typesafe.config.Config;
+import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigFactory;
 import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,7 +64,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     int fps = getFramesPerSecond();
     switch (config.getString("output")) {
       case "led":
-        return new MatrixLedView(fps);
+        return new MatrixLedView(fps, getConnectionRemoteIp(), getConnectionRemotePort());
       case "sysout":
       default:
         return new SysOutView();
@@ -102,6 +106,14 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
 
   private int getFramesPerSecond() {
     return config.getInt("fps");
+  }
+
+  private String getConnectionRemoteIp() {
+    return config.getString("connection.remoteIp");
+  }
+
+  private int getConnectionRemotePort() {
+    return config.getInt("connection.remotePort");
   }
 
   private File getConfigFile() {

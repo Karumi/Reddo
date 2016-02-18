@@ -1,9 +1,14 @@
 {
   "fps" : 60,
   "output" : "led",
+  "connection" : {
+    "remoteIp" : "127.0.0.1",
+    "remotePort" : 9001
+  },
   "gitHubOauthToken" : "",
   "messages" : [
-    "Welcome to the Karumi HQs ¯\\_(ツ)_/¯"
+    "Welcome to the Karumi HQs",
+    "Don't forget to take out the trash on thursdays!"
   ],
   "gitHubRepositories" : [
     "Karumi/Dexter",
