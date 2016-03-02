@@ -70,6 +70,8 @@ Connect your panel power wire to the power supply using the jack adapter:
 TODO diagram
 
 
+
+
 ### Configuration file
 
 The configuration file is written in plain JSON and is the only file you will need to modify to get your Reddo working. You can configure all the tasks you want to execute like the GitHub repositories you want to watch or the predefined messages you want to show. Here is an example of the configuration file:
@@ -111,22 +113,6 @@ Keep in mind that your PRs must be validated in Travis-CI. Please, run a local b
 ## Acknowledgments
 
 Thanks to [hzeller][hzeller] for his impressive work and specially for his project [rpi-rgb-led-matrix][rpi-rgb-led-matrix]
-
-## License
-
-Copyright 2016 Karumi
-
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-
-  http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
 
 [reddologo]: art/reddo.png
 [materials_display]: art/materials_display.png
