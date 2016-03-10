@@ -31,7 +31,7 @@ import java.util.List;
 public class MatrixLedView implements View {
 
   private static final int LED_HEIGHT = 16;
-  private static final int MIN_FPS = 60;
+  private static final int MIN_FPS = 20;
 
   private final int fps;
   private final String ip;

@@ -11,6 +11,8 @@ With Reddo you will be able to show any messages you want in your LED matrix, fr
 
 ## Demo
 
+![Demo][demo]
+
 ## Usage
 
 To start using reddo you will need to first set up your components. Take your Raspberry Pi and your matrix display and let us get started!
@@ -22,9 +24,6 @@ You will need to connect your Raspberry to your display, you can use one of the 
 #### Materials
 
 * LED matrix panel ![materials_display][materials_display]
-* LED matrix panel power wire
-
-#TODO IMAGE
 * Raspberry Pi 2 ![materials_rpi][materials_rpi]
 * Power supply for your Raspberry ![materials_rpi_power_supply][materials_rpi_power_supply]
 * Lots of wires ![materials_wires][materials_wires]
@@ -103,6 +102,8 @@ The configuration file is written in plain JSON and is the only file you will ne
 
 ```
 
+The configuration file has to at the same place you are executing the Reddo binary.
+
 ### Running Reddo
 
 Now that everything is connected and configured is time to let your LEDs shine!
@@ -136,6 +137,7 @@ Thanks to [hzeller][hzeller] for his impressive work and specially for his proje
 [materials_rpi_power_supply]: art/materials_rpi_power_supply.png
 [materials_wires]: art/materials_wires.png
 [materials_adapter]: art/materials_adapter.png
+[demo]: art/demo.gif
 [connection_diagram_1]: art/connection_diagram_1.png
 [connection_diagram_2]: art/connection_diagram_2.png
 [connection_diagram_3]: art/connection_diagram_3.png
