@@ -1,5 +1,5 @@
 group 'com.karumi'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 apply plugin: 'java'
 apply plugin: 'application'
@@ -16,6 +16,17 @@ dependencies {
     compile 'org.kohsuke:github-api:1.72'
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10.19'
+}
+
+distributions {
+    main {
+        baseName = 'reddo'
+        contents {
+            from {
+                'script'
+            }
+        }
+    }
 }
 
 mainClassName = "com.karumi.reddo.Main"
