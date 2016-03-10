@@ -93,7 +93,8 @@ The configuration file is written in plain JSON and is the only file you will ne
     "Karumi/BothamUI",
     "Karumi/BothamNetworking",
     "Karumi/ExpandableSelector",
-    "Karumi/HeaderRecyclerView"
+    "Karumi/HeaderRecyclerView",
+    "Karumi/Reddo"
   ],
   "gitHubUsers" : [
     "karumi"
@@ -118,13 +119,13 @@ First off you will need to compile your project, we highly recommend doing it on
 
 ## Why?
 
-¯\\_(ツ)_/¯
+¯\\_(ツ)_/¯ we had some free time!
 
 ## Do you want to contribute?
 
 Be creative and feel free to add any useful feature/integration to the project, we can't wait to see your ideas!
 
-Keep in mind that your PRs must be validated in Travis-CI. Please, run a local build with `./gradlew checkstyle build` before submiting your code.
+Keep in mind that your PRs must be validated in Travis-CI. Please, run a local build with `./gradlew build` before submiting your code.
 
 ## Acknowledgments
 
