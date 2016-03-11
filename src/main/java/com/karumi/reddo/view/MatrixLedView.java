@@ -39,6 +39,7 @@ public class MatrixLedView implements View {
   private void drawImage(BufferedImage outputImage) {
     Socket socket = getSocket();
     try {
+      System.out.println("Sending image to the LED matrix");
       DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
       for (int frame = 0; frame < outputImage.getWidth() - 32; frame++) {
@@ -46,7 +47,7 @@ public class MatrixLedView implements View {
         waitForNextFrame();
       }
     } catch (IOException e) {
-      throw new MatrixLedViewException(e.getMessage());
+      e.printStackTrace();
     }
   }
 

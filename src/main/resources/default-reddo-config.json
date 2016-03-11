@@ -1,5 +1,5 @@
 {
-  "fps" : 60,
+  "fps" : 30,
   "output" : "led",
   "connection" : {
     "remoteIp" : "127.0.0.1",
@@ -7,18 +7,10 @@
   },
   "gitHubOauthToken" : "",
   "messages" : [
-    "Welcome to the Karumi HQs",
-    "Don't forget to take out the trash on thursdays!"
+    "Welcome to Reddo. Made with love by Karumi!"
   ],
   "gitHubRepositories" : [
-    "Karumi/Dexter",
-    "Karumi/Rosie",
-    "Karumi/BothamUI",
-    "Karumi/BothamNetworking",
-    "Karumi/ExpandableSelector",
-    "Karumi/HeaderRecyclerView"
+    "Karumi/Reddo"
   ],
-  "gitHubUsers" : [
-    "karumi"
-  ]
+  "gitHubUsers" : []
 }

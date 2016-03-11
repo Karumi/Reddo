@@ -9,6 +9,7 @@ public class MessageTask implements ReddoTask {
   }
 
   @Override public String execute() {
+    System.out.println("Message loaded: " + messsage);
     return messsage;
   }
 }
