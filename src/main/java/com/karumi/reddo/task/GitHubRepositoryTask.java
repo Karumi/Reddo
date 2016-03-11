@@ -13,7 +13,8 @@ public class GitHubRepositoryTask implements ReddoTask {
     this.gitHubApiClient = gitHubApiClient;
   }
 
-  @Override public String execute() {
+  @Override
+  public String execute() {
     GitHubRepository repository = gitHubApiClient.getRepository(repositoryName);
     System.out.println("Repository info downloaded for repository: " + repository.getName());
     return repository.toString();

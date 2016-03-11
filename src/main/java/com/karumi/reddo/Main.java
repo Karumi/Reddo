@@ -4,6 +4,7 @@ import com.karumi.reddo.config.ReddoConfig;
 import com.karumi.reddo.config.TypesafeHubReddoConfig;
 import com.karumi.reddo.task.ReddoTask;
 import com.karumi.reddo.view.View;
+
 import java.util.Collection;
 
 public class Main {

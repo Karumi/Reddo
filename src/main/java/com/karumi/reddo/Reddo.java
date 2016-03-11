@@ -2,6 +2,7 @@ package com.karumi.reddo;
 
 import com.karumi.reddo.task.ReddoTask;
 import com.karumi.reddo.view.View;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
