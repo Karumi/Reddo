@@ -8,7 +8,8 @@ public class MessageTask implements ReddoTask {
     this.messsage = messsage;
   }
 
-  @Override public String execute() {
+  @Override
+  public String execute() {
     return messsage;
   }
 }

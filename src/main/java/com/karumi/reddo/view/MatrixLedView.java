@@ -20,7 +20,6 @@ public class MatrixLedView implements View {
   private final int fps;
   private final String ip;
   private final int port;
-  private Socket socket;
 
   public MatrixLedView(int fps, String ip, int port) {
     validateFps(fps);
@@ -29,7 +28,8 @@ public class MatrixLedView implements View {
     this.port = port;
   }
 
-  @Override public void showMessages(List<String> messages) {
+  @Override
+  public void showMessages(List<String> messages) {
     String joinMessages = String.join(" --- ", messages);
     int stringWidthInPixels = getStringWidthInPixels(joinMessages);
     BufferedImage outputImage = getJoinMessagesAsImage(joinMessages, stringWidthInPixels);
@@ -37,8 +37,7 @@ public class MatrixLedView implements View {
   }
 
   private void drawImage(BufferedImage outputImage) {
-    Socket socket = getSocket();
-    try {
+    try (Socket socket = createSocket()) {
       DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
       for (int frame = 0; frame < outputImage.getWidth() - 32; frame++) {
@@ -96,14 +95,6 @@ public class MatrixLedView implements View {
     if (fps < MIN_FPS) {
       throw new IllegalArgumentException("The configured fps can't be less than 60");
     }
-  }
-
-  private Socket getSocket() {
-    if (socket == null) {
-      socket = createSocket();
-    }
-
-    return socket;
   }
 
   private Socket createSocket() {

@@ -13,7 +13,7 @@ public class GitHubRepository {
   private final int watchers;
 
   public GitHubRepository(String name, int stars, int openPullRequests, int pullRequests,
-      int openIssues, int branches, int collaborators, int forks, int watchers) {
+                          int openIssues, int branches, int collaborators, int forks, int watchers) {
     this.name = name;
     this.stars = stars;
     this.openPullRequests = openPullRequests;
@@ -61,12 +61,13 @@ public class GitHubRepository {
     return watchers;
   }
 
-  @Override public String toString() {
+  @Override
+  public String toString() {
     return
         "" + name + " -> " +
-        " ★ : " + stars +
-        ", Issues : " + openIssues +
-        ", Open PRs : " + openPullRequests +
-        ", PRs : " + pullRequests;
+            " ★ : " + stars +
+            ", Issues : " + openIssues +
+            ", Open PRs : " + openPullRequests +
+            ", PRs : " + pullRequests;
   }
 }
