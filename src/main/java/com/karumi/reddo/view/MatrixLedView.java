@@ -37,6 +37,7 @@ public class MatrixLedView implements View {
   }
 
   private void drawImage(BufferedImage outputImage) {
+    System.out.println("Sending image to the LED matrix");
     try (Socket socket = createSocket()) {
       DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
