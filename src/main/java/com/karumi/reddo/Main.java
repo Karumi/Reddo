@@ -10,11 +10,13 @@ import java.util.Collection;
 public class Main {
 
   public static void main(String[] args) {
+    System.out.println("Let's gonna start!!!");
     ReddoConfig config = new TypesafeHubReddoConfig();
     View view = config.getView();
     Reddo reddo = new Reddo(view);
     Collection<ReddoTask> tasksFromConfig = config.getTasks();
     reddo.addTasks(tasksFromConfig);
+    System.out.println(tasksFromConfig.size() + " tasks loaded.");
     while (true) {
       reddo.evaluateTasks();
     }

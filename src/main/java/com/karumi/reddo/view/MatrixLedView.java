@@ -45,6 +45,7 @@ public class MatrixLedView implements View {
         drawFrame(outputImage.getSubimage(frame, 0, 32, 16), stream);
         waitForNextFrame();
       }
+      stream.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
