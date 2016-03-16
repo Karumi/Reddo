@@ -3,7 +3,7 @@
 #Reddo
 ---------------
 
-[![Build Status](https://travis-ci.com/Karumi/Reddo.svg?token=Kb2RqPaWxFZ8XPxpqvqz&branch=master)](https://travis-ci.com/Karumi/Reddo)
+[![Build Status](https://travis-ci.org/Karumi/Reddo.svg?token=Kb2RqPaWxFZ8XPxpqvqz&branch=master)](https://travis-ci.org/Karumi/Reddo)
 
 Reddo is a fun project to make the most out of your Raspberry PI + matrix display.
 
