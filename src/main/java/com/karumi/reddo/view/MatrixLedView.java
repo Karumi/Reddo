@@ -95,7 +95,7 @@ public class MatrixLedView implements View {
 
   private void validateFps(int fps) {
     if (fps < MIN_FPS) {
-      throw new IllegalArgumentException("The configured fps can't be less than 60");
+      throw new IllegalArgumentException("The configured fps can't be less than " + MIN_FPS );
     }
   }
 
