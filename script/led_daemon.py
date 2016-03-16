@@ -95,11 +95,11 @@ class Daemon:
 
 	def start(self):
 		self.matrix.brightness = 30
+		canvas = self.matrix.CreateFrameCanvas()
 		while True:
 			self.reddo_socket.accept_connection()
 			frame = Frame.from_connection(self.reddo_socket)
 			while frame:
-				canvas = self.matrix.CreateFrameCanvas()
 				for i in range(frame.height):
 					for j in range(frame.width):
 						pixel = frame.get_pixel(j, i)
