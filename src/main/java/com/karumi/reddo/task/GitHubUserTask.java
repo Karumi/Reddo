@@ -18,6 +18,7 @@ public class GitHubUserTask implements ReddoTask {
   @Override
   public String execute() {
     List<GitHubRepository> userRepositories = gitHubApiClient.getUserRepositories(user);
+    System.out.println("Repositories info downloaded for user: " + user);
     return userRepositories.toString();
   }
 }

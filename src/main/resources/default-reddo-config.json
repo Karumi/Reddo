@@ -1,11 +1,15 @@
 {
-  "fps" : 60,
+  "fps" : 30,
   "output" : "led",
   "connection" : {
     "remoteIp" : "127.0.0.1",
     "remotePort" : 9001
   },
   "messages" : [
-    "Welcome to the Karumi HQs"
-  ]
+    "Welcome to Reddo. Made with love by Karumi!"
+  ],
+  "gitHubRepositories" : [
+    "Karumi/Reddo"
+  ],
+  "gitHubUsers" : []
 }

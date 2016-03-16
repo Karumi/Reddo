@@ -15,6 +15,7 @@ import java.util.List;
 public class MatrixLedView implements View {
 
   private static final int LED_HEIGHT = 16;
+  private static final int LED_WIDTH = 32;
   private static final int MIN_FPS = 20;
 
   private final int fps;
@@ -37,15 +38,16 @@ public class MatrixLedView implements View {
   }
 
   private void drawImage(BufferedImage outputImage) {
+    System.out.println("Sending image to the LED matrix");
     try (Socket socket = createSocket()) {
       DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
-      for (int frame = 0; frame < outputImage.getWidth() - 32; frame++) {
-        drawFrame(outputImage.getSubimage(frame, 0, 32, 16), stream);
+      for (int frame = 0; frame < outputImage.getWidth() - LED_WIDTH; frame++) {
+        drawFrame(outputImage.getSubimage(frame, 0, LED_WIDTH, LED_HEIGHT), stream);
         waitForNextFrame();
       }
     } catch (IOException e) {
-      throw new MatrixLedViewException(e.getMessage());
+      e.printStackTrace();
     }
   }
 
@@ -93,7 +95,7 @@ public class MatrixLedView implements View {
 
   private void validateFps(int fps) {
     if (fps < MIN_FPS) {
-      throw new IllegalArgumentException("The configured fps can't be less than 60");
+      throw new IllegalArgumentException("The configured fps can't be less than " + MIN_FPS );
     }
   }
 

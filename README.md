@@ -114,7 +114,7 @@ First off you will need to compile your project, we highly recommend doing it on
 1. Install the awesome [rpi-rgb-led-matrix][rpi-rgb-led-matrix] library on your raspberry.
 2. Download this repository and build it with the command `./gradlew build`
 3. Copy the file named `build/distributions/reddo-$VERSION.zip` to your Raspberry. 
-4. Unzip the compressed file and run `./reddo.sh`
+4. Unzip the compressed file and run `./run.sh`
 5. ???
 6. Profit
 
