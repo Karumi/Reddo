@@ -15,6 +15,7 @@ import java.util.List;
 public class MatrixLedView implements View {
 
   private static final int LED_HEIGHT = 16;
+  private static final int LEG_WIDTH = 32;
   private static final int MIN_FPS = 20;
 
   private final int fps;
@@ -41,11 +42,10 @@ public class MatrixLedView implements View {
     try (Socket socket = createSocket()) {
       DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
 
-      for (int frame = 0; frame < outputImage.getWidth() - 32; frame++) {
-        drawFrame(outputImage.getSubimage(frame, 0, 32, 16), stream);
+      for (int frame = 0; frame < outputImage.getWidth() - LEG_WIDTH; frame++) {
+        drawFrame(outputImage.getSubimage(frame, 0, LEG_WIDTH, LED_HEIGHT), stream);
         waitForNextFrame();
       }
-      stream.close();
     } catch (IOException e) {
       e.printStackTrace();
     }
