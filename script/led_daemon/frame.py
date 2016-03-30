@@ -12,8 +12,8 @@ class Frame:
 
     def get_subframe(self, x_offset, width):
         pixels = [self.get_pixel(x, y)
-                  for x in range(x_offset, x_offset + width)
-                  for y in range(self.height)]
+                  for y in range(self.height)
+                  for x in range(x_offset, x_offset + width)]
         return Frame(width, self.height, pixels)
 
     def get_pixel(self, x, y):
@@ -27,7 +27,7 @@ class Frame:
         for row in range(self.height):
             for col in range(self.width):
                 pixel = self.get_pixel(col, row)
-                if pixel.blue > 0:
+                if pixel.red > 0 or pixel.green > 0 or pixel.blue > 0:
                     frame_str += "◼"
                 else:
                     frame_str += "◻"

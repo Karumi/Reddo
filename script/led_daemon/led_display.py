@@ -1,6 +1,7 @@
 from rgbmatrix import RGBMatrix
 
 
+# Display implementation that renders every frame on your connected LED screen.
 class Display:
     def __init__(self):
         self.matrix = RGBMatrix(16)
@@ -10,7 +11,6 @@ class Display:
         self.height = 16
 
     def render(self, frame):
-        print frame
         min_height = min(self.height, frame.height)
         min_width = min(self.width, frame.width)
         for row in range(min_height):

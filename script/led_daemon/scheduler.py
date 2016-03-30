@@ -1,12 +1,12 @@
 import Queue
 import threading
-import display
+from led_display import Display
 
 
 class Scheduler:
     def __init__(self):
-        self.display = display.Display()
-        self.queue = Queue.Queue()
+        self.display = Display()
+        self.queue = Queue.Queue(64)
         self.queue_lock = threading.Lock()
         self.is_processing_task = False
 
@@ -35,4 +35,5 @@ class SchedulerTask:
 
     def execute(self):
         self.inner_task.execute()
+        self.scheduler.is_processing_task = False
         self.scheduler.process_queue()

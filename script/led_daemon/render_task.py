@@ -27,11 +27,11 @@ class RenderTask:
         allocated_frame_time_ms = 1000 / float(self.fps)
         frame_render_time_ms = self.now_ms() - start_time_ms
         sleep_time_ms = max(0, allocated_frame_time_ms - frame_render_time_ms)
-        print "Sleeping for... " + str(sleep_time_ms / 1000.0)
         time.sleep(sleep_time_ms / 1000.0)
 
     def now_ms(self):
         return time.time() * 1000
+
 
 class RenderTaskReader:
     def __init__(self, frame_reader):
