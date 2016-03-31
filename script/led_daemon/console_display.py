@@ -4,8 +4,8 @@ import os
 
 
 # This display is meant for debug purposes only.
-# It renders every frame in the console, it's supposed to be used to test it
-# in your raspberry or remote session
+# It renders every frame in the console, it's supposed to be used to test the
+# daemon in your raspberry or remote session
 class Display:
 
     PIXEL = "◼◼"

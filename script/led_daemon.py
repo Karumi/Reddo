@@ -1,18 +1,9 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
 import BaseHTTPServer
 import time
-from led_daemon import router
-
-
-router = router.Router()
-
-
-class Server(BaseHTTPServer.BaseHTTPRequestHandler):
-    def do_POST(self):
-        router.route(self)
-        self.end_headers()
+from led_daemon.router import Router
+from led_daemon.server import Server
 
 
 def main():
@@ -24,6 +15,7 @@ def main():
         pass
     httpd.server_close()
     print time.asctime(), "Server Stops"
+    exit()
 
 if __name__ == "__main__":
     main()

@@ -23,16 +23,7 @@ class Frame:
         return self.pixels[y * self.width + x]
 
     def __repr__(self):
-        frame_str = ""
-        for row in range(self.height):
-            for col in range(self.width):
-                pixel = self.get_pixel(col, row)
-                if pixel.red > 0 or pixel.green > 0 or pixel.blue > 0:
-                    frame_str += "◼"
-                else:
-                    frame_str += "◻"
-            frame_str += "\n"
-        return frame_str
+        return "Frame[" + str(self.width) + "x" + str(self.height) + "]"
 
 
 class FrameReader:

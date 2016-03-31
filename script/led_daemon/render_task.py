@@ -1,28 +1,28 @@
 import time
 
 
+# A command to render a scrolling frame in the specified display.
 class RenderTask:
     def __init__(self, fps, frame):
         self.fps = fps
         self.frame = frame
-        self.display = None
 
-    def execute(self):
-        windows_count = max(1, self.frame.width - self.display.width)
-        for window in range(windows_count):
+    def execute(self, display):
+        windows_count = max(1, self.frame.width - display.width)
+        for window in range(windows_count + 1):
             render_frame_start_time_ms = self.now_ms()
-            subframe = self.frame.get_subframe(window, self.display.width)
-            self.display.render(subframe)
+            subframe = self.frame.get_subframe(window, display.width)
+            display.render(subframe)
             self.sleep_until_next_frame(render_frame_start_time_ms)
-        self.display.clean()
+        display.clean()
 
     # This method makes the thread sleeps until the allocated time for each
     # frame is consumed.
-    #  _____________________________
-    # |     Allocated frame time    |
-    # |-----------------------------|
-    # |   Render time  | Sleep time |
-    # |----------------|------------|
+    #  ________________________________
+    # | Allocated frame time (1 / fps) |
+    # |--------------------------------|
+    # |    Render time   |  Sleep time |
+    # |------------------|-------------|
     def sleep_until_next_frame(self, start_time_ms):
         allocated_frame_time_ms = 1000 / float(self.fps)
         frame_render_time_ms = self.now_ms() - start_time_ms
