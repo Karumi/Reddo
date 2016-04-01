@@ -1,5 +1,7 @@
 package com.karumi.reddo.config;
 
+import com.karumi.reddo.api.OkHttpReddoApiClient;
+import com.karumi.reddo.api.ReddoApiClient;
 import com.karumi.reddo.github.GitHubApiClient;
 import com.karumi.reddo.task.GitHubRepositoryTask;
 import com.karumi.reddo.task.GitHubUserTask;
@@ -10,7 +12,6 @@ import com.karumi.reddo.view.SysOutView;
 import com.karumi.reddo.view.View;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
-
 import java.io.File;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -33,8 +34,7 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     config.checkValid(config, CONFIG_NAME);
   }
 
-  @Override
-  public List<ReddoTask> getTasks() {
+  @Override public List<ReddoTask> getTasks() {
     List<ReddoTask> tasks = new LinkedList<>();
     tasks.addAll(getMessagesTasks());
     tasks.addAll(getGitHubRepositoriesTasks());
@@ -42,12 +42,13 @@ public class TypesafeHubReddoConfig implements ReddoConfig {
     return tasks;
   }
 
-  @Override
-  public View getView() {
+  @Override public View getView() {
     int fps = getFramesPerSecond();
     switch (config.getString("output")) {
       case "led":
-        return new MatrixLedView(fps, getConnectionRemoteIp(), getConnectionRemotePort());
+        ReddoApiClient apiClient =
+            new OkHttpReddoApiClient(getConnectionRemoteIp(), getConnectionRemotePort());
+        return new MatrixLedView(fps, apiClient);
       case "sysout":
       default:
         return new SysOutView();

@@ -1,15 +1,15 @@
 package com.karumi.reddo.view;
 
-import com.karumi.reddo.view.exceptions.MatrixLedViewException;
+import com.karumi.reddo.api.Base64Image;
+import com.karumi.reddo.api.ReddoApiClient;
 
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
+import java.util.Base64;
 import java.util.List;
 
 public class MatrixLedView implements View {
@@ -19,14 +19,12 @@ public class MatrixLedView implements View {
   private static final int MIN_FPS = 20;
 
   private final int fps;
-  private final String ip;
-  private final int port;
+  private final ReddoApiClient apiClient;
 
-  public MatrixLedView(int fps, String ip, int port) {
+  public MatrixLedView(int fps, ReddoApiClient apiClient) {
     validateFps(fps);
     this.fps = fps;
-    this.ip = ip;
-    this.port = port;
+    this.apiClient = apiClient;
   }
 
   @Override
@@ -35,38 +33,39 @@ public class MatrixLedView implements View {
     int stringWidthInPixels = getStringWidthInPixels(joinMessages);
     BufferedImage outputImage = getJoinMessagesAsImage(joinMessages, stringWidthInPixels);
     drawImage(outputImage);
+    waitForNextFrame(outputImage.getWidth());
   }
 
   private void drawImage(BufferedImage outputImage) {
-    System.out.println("Sending image to the LED matrix");
-    try (Socket socket = createSocket()) {
-      DataOutputStream stream = new DataOutputStream(socket.getOutputStream());
-
-      for (int frame = 0; frame < outputImage.getWidth() - LED_WIDTH; frame++) {
-        drawFrame(outputImage.getSubimage(frame, 0, LED_WIDTH, LED_HEIGHT), stream);
-        waitForNextFrame();
-      }
+    String base64Image = generateBase64Image(outputImage);
+    int width = outputImage.getWidth();
+    int height = outputImage.getHeight();
+    Base64Image image = new Base64Image(width, height, base64Image);
+    try {
+      apiClient.enqueueImage(fps, image);
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
 
-  private void drawFrame(BufferedImage outputImage, DataOutputStream stream) throws IOException {
-    stream.writeInt(outputImage.getHeight());
-    stream.writeInt(outputImage.getWidth());
-
+  private String generateBase64Image(BufferedImage outputImage) {
+    byte[] data = new byte[3 * outputImage.getWidth() * outputImage.getHeight()];
     for (int y = 0; y < outputImage.getHeight(); y++) {
       for (int x = 0; x < outputImage.getWidth(); x++) {
         int rgb = outputImage.getRGB(x, y);
-        stream.writeInt(rgb);
+        data[x * 3 + y * (3 * outputImage.getWidth())] = (byte) (rgb & 0xFF0000);
+        data[x * 3 + y * (3 * outputImage.getWidth()) + 1] = (byte) (rgb & 0x00FF00);
+        data[x * 3 + y * (3 * outputImage.getWidth()) + 2] = (byte) (rgb & 0x0000FF);
       }
     }
+    return Base64.getEncoder().encodeToString(data);
   }
 
-  private void waitForNextFrame() {
+  private void waitForNextFrame(int imageWidth) {
     float frameTime = 1 / (float) fps * 1000;
+    float imageTime = frameTime * imageWidth;
     try {
-      Thread.sleep((long) frameTime);
+      Thread.sleep((long) imageTime);
     } catch (InterruptedException e) {
       e.printStackTrace();
     }
@@ -99,11 +98,5 @@ public class MatrixLedView implements View {
     }
   }
 
-  private Socket createSocket() {
-    try {
-      return new Socket(ip, port);
-    } catch (IOException e) {
-      throw new MatrixLedViewException("Impossible to create a socket to " + ip + ":" + port);
-    }
-  }
+
 }
