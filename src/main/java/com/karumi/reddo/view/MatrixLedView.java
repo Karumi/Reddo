@@ -16,8 +16,8 @@ import java.util.List;
 public class MatrixLedView implements View {
 
   private static final int LED_HEIGHT = 16;
-  private static final int LED_WIDTH = 32;
   private static final int MIN_FPS = 20;
+  private static final int COLOR_COUNT = 3;
 
   private final int fps;
   private final ReddoApiClient apiClient;
@@ -50,13 +50,13 @@ public class MatrixLedView implements View {
   }
 
   private String generateBase64Image(BufferedImage outputImage) {
-    byte[] data = new byte[3 * outputImage.getWidth() * outputImage.getHeight()];
+    byte[] data = new byte[COLOR_COUNT * outputImage.getWidth() * outputImage.getHeight()];
     for (int y = 0; y < outputImage.getHeight(); y++) {
       for (int x = 0; x < outputImage.getWidth(); x++) {
         int rgb = outputImage.getRGB(x, y);
-        data[x * 3 + y * (3 * outputImage.getWidth())] = (byte) (rgb & 0xFF0000);
-        data[x * 3 + y * (3 * outputImage.getWidth()) + 1] = (byte) (rgb & 0x00FF00);
-        data[x * 3 + y * (3 * outputImage.getWidth()) + 2] = (byte) (rgb & 0x0000FF);
+        data[x * COLOR_COUNT + y * (COLOR_COUNT * outputImage.getWidth())] = (byte) (rgb & 0xFF0000);
+        data[x * COLOR_COUNT + y * (COLOR_COUNT * outputImage.getWidth()) + 1] = (byte) (rgb & 0x00FF00);
+        data[x * COLOR_COUNT + y * (COLOR_COUNT * outputImage.getWidth()) + 2] = (byte) (rgb & 0x0000FF);
       }
     }
     return Base64.getEncoder().encodeToString(data);
