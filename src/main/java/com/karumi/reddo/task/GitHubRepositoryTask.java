@@ -2,6 +2,7 @@ package com.karumi.reddo.task;
 
 import com.karumi.reddo.github.GitHubApiClient;
 import com.karumi.reddo.github.GitHubRepository;
+import com.karumi.reddo.log.Log;
 
 public class GitHubRepositoryTask implements ReddoTask {
 
@@ -16,7 +17,7 @@ public class GitHubRepositoryTask implements ReddoTask {
   @Override
   public String execute() {
     GitHubRepository repository = gitHubApiClient.getRepository(repositoryName);
-    System.out.println("Repository info downloaded for repository: " + repository.getName());
+    Log.d("Repository info downloaded for repository: " + repository.getName());
     return repository.toString();
   }
 }

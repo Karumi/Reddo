@@ -1,3 +1,3 @@
 #!/bin/sh
-sudo python led_daemon.py &
+sudo ./led_daemon.py &
 ./bin/reddo &

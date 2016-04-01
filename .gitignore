@@ -23,3 +23,6 @@ Thumbs.db
 *.bak
 
 reddo-config.json
+*.log
+
+*.pyc

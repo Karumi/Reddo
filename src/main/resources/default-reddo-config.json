@@ -3,7 +3,7 @@
   "output" : "led",
   "connection" : {
     "remoteIp" : "127.0.0.1",
-    "remotePort" : 9001
+    "remotePort" : 9050
   },
   "messages" : [
     "Welcome to Reddo. Made with love by Karumi!"
