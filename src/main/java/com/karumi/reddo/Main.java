@@ -22,7 +22,7 @@ public class Main {
     while (true) {
       try {
         reddo.evaluateTasks();
-      } catch (MatrixLedViewException e) {
+      } catch (Exception e) {
         Log.e(e.toString());
       }
     }
