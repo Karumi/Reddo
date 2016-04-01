@@ -20,7 +20,7 @@ public class GitHubApiClient {
     try {
       gitHub = GitHub.connectUsingOAuth(oauthToken);
     } catch (IOException e) {
-      System.out.println("Error connecting to the GitHub API using the oauth token " + oauthToken);
+      System.err.println("Error connecting to the GitHub API using the oauth token " + oauthToken);
     }
   }
 
