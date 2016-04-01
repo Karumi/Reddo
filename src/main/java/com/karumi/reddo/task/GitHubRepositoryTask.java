@@ -18,6 +18,6 @@ public class GitHubRepositoryTask implements ReddoTask {
   public String execute() {
     GitHubRepository repository = gitHubApiClient.getRepository(repositoryName);
     Log.d("Repository info downloaded for repository: " + repository.getName());
-    return repository.toString();
+    return repository != null ? repository.toString() : "";
   }
 }
