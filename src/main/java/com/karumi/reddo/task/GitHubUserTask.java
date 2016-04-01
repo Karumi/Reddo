@@ -3,6 +3,7 @@ package com.karumi.reddo.task;
 import com.karumi.reddo.github.GitHubApiClient;
 import com.karumi.reddo.github.GitHubRepository;
 
+import com.karumi.reddo.log.Log;
 import java.util.List;
 
 public class GitHubUserTask implements ReddoTask {
@@ -18,7 +19,7 @@ public class GitHubUserTask implements ReddoTask {
   @Override
   public String execute() {
     List<GitHubRepository> userRepositories = gitHubApiClient.getUserRepositories(user);
-    System.out.println("Repositories info downloaded for user: " + user);
+    Log.d("Repositories info downloaded for user: " + user);
     return userRepositories.toString();
   }
 }

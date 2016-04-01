@@ -1,5 +1,6 @@
 package com.karumi.reddo.github;
 
+import com.karumi.reddo.log.Log;
 import org.kohsuke.github.GHIssueState;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
@@ -20,7 +21,7 @@ public class GitHubApiClient {
     try {
       gitHub = GitHub.connectUsingOAuth(oauthToken);
     } catch (IOException e) {
-      System.err.println("Error connecting to the GitHub API using the oauth token " + oauthToken);
+      Log.e("Error connecting to the GitHub API using the oauth token " + oauthToken);
     }
   }
 
@@ -33,7 +34,7 @@ public class GitHubApiClient {
       GHRepository gitHubRepository = gitHub.getRepository(name);
       repository = mapGhRepository(gitHubRepository);
     } catch (IOException e) {
-      System.out.println("Error retrieving repository " + name);
+      Log.e("Error retrieving repository " + name);
     }
     return repository;
   }
@@ -45,7 +46,7 @@ public class GitHubApiClient {
       Map<String, GHRepository> gitHubRepositories = gitHub.getUser(user).getRepositories();
       repositories = mapGhRepositories(gitHubRepositories.values());
     } catch (IOException e) {
-      System.out.println("Error retrieving repositories from user " + user);
+      Log.e("Error retrieving repositories from user " + user);
     }
     return repositories;
   }

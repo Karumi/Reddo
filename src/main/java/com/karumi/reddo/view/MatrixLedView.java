@@ -3,6 +3,7 @@ package com.karumi.reddo.view;
 import com.karumi.reddo.api.Base64Image;
 import com.karumi.reddo.api.ReddoApiClient;
 
+import com.karumi.reddo.log.Log;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -44,7 +45,7 @@ public class MatrixLedView implements View {
     try {
       apiClient.enqueueImage(fps, image);
     } catch (IOException e) {
-      e.printStackTrace();
+      Log.e(e.toString());
     }
   }
 
@@ -67,7 +68,7 @@ public class MatrixLedView implements View {
     try {
       Thread.sleep((long) imageTime);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      Log.e(e.toString());
     }
   }
 

@@ -1,0 +1,8 @@
+2016-04-01 13:05:33 DEBUG Reddo:10 - Let's gonna start!!!
+2016-04-01 13:05:35 DEBUG Reddo:10 - 4 tasks loaded.
+2016-04-01 13:05:35 DEBUG Reddo:10 - Message loaded: Welcome to the Karumi HQs ¯\_(ツ)_/¯
+2016-04-01 13:05:37 DEBUG Reddo:10 - Repository info downloaded for repository: Reddo
+2016-04-01 13:05:44 DEBUG Reddo:10 - Repository info downloaded for repository: Dexter
+2016-04-01 13:05:44 DEBUG Reddo:10 - Repository info downloaded for repository: Rosie
+2016-04-01 13:05:45 DEBUG Reddo:10 - Sending request to the Reddo service: Request{method=POST, url=http://127.0.0.1:9050/render, tag=null}
+2016-04-01 13:05:45 ERROR Reddo:14 - java.net.ConnectException: Failed to connect to /127.0.0.1:9050

@@ -1,5 +1,7 @@
 package com.karumi.reddo.task;
 
+import com.karumi.reddo.log.Log;
+
 public class MessageTask implements ReddoTask {
 
   private final String messsage;
@@ -9,7 +11,7 @@ public class MessageTask implements ReddoTask {
   }
   
   @Override public String execute() {
-    System.out.println("Message loaded: " + messsage);
+    Log.d("Message loaded: " + messsage);
     return messsage;
   }
 }

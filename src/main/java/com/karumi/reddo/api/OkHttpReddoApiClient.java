@@ -1,5 +1,6 @@
 package com.karumi.reddo.api;
 
+import com.karumi.reddo.log.Log;
 import java.io.IOException;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
@@ -26,14 +27,13 @@ public class OkHttpReddoApiClient implements ReddoApiClient {
   @Override public void enqueueImage(int fps, Base64Image base64image) throws IOException {
     String json = generateRequestBody(fps, base64image);
     RequestBody body = RequestBody.create(JSON, json);
-    HttpUrl reddoServiceUrl = new HttpUrl.Builder()
-        .scheme(SERVICE_SCHEME)
+    HttpUrl reddoServiceUrl = new HttpUrl.Builder().scheme(SERVICE_SCHEME)
         .host(ip)
         .port(port)
         .addPathSegment(SERVICE_PATH)
         .build();
     Request request = new Request.Builder().url(reddoServiceUrl).post(body).build();
-    System.out.println("Sending request to the Reddo service: " + request);
+    Log.d("Sending request to the Reddo service: " + request);
     httpClient.newCall(request).execute().body().close();
   }
 
