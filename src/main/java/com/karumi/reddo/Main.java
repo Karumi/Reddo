@@ -5,6 +5,7 @@ import com.karumi.reddo.config.TypesafeHubReddoConfig;
 import com.karumi.reddo.task.ReddoTask;
 import com.karumi.reddo.view.View;
 
+import com.karumi.reddo.view.exceptions.MatrixLedViewException;
 import java.util.Collection;
 
 public class Main {
@@ -18,7 +19,11 @@ public class Main {
     reddo.addTasks(tasksFromConfig);
     System.out.println(tasksFromConfig.size() + " tasks loaded.");
     while (true) {
-      reddo.evaluateTasks();
+      try {
+        reddo.evaluateTasks();
+      } catch (MatrixLedViewException e) {
+        e.printStackTrace();
+      }
     }
   }
 }
