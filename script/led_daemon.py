@@ -2,6 +2,10 @@
 
 import BaseHTTPServer
 import time
+from logging import Logger
+
+import sys
+
 from led_daemon.router import Router
 from led_daemon.server import Server
 
@@ -18,4 +22,7 @@ def main():
     exit()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except:
+        Logger.debug("Error %s", sys.exc_info()[0])
