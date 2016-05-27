@@ -15,6 +15,7 @@ class RenderTask:
             display.render(subframe)
             self.sleep_until_next_frame(render_frame_start_time_ms)
         display.clean()
+        self.frame = None
 
     # This method makes the thread sleeps until the allocated time for each
     # frame is consumed.

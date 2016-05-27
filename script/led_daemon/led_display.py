@@ -23,3 +23,4 @@ class Display:
     def clean(self):
         self.canvas.Fill(0, 0, 0)
         self.canvas = self.matrix.SwapOnVSync(self.canvas)
+        self.canvas = None
