@@ -1,14 +1,18 @@
 import json
-import render_task
-import frame
-import scheduler
+from frame import FrameReader
+from task.frame_renderer import FrameRenderer
+from task.render_task_factory import RenderTaskFactory
+from task.render_task_reader import RenderTaskReader
+from scheduler import Scheduler
 
 
 class Router:
     def __init__(self):
-        frame_reader = frame.FrameReader()
-        self.reader = render_task.RenderTaskReader(frame_reader)
-        self.scheduler = scheduler.Scheduler()
+        frame_reader = FrameReader()
+        renderer = FrameRenderer()
+        render_task_factory = RenderTaskFactory(renderer)
+        self.reader = RenderTaskReader(frame_reader, render_task_factory)
+        self.scheduler = Scheduler()
 
     def route(self, handler):
         if self.is_render_request(handler):
